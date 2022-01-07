@@ -10,7 +10,7 @@ const NotesList = () => {
     },[])
 
     let getNotes = async () => {
-        let respone = await fetch("https://django-react-note.herokuapp.com/api/notes/");
+        let respone = await fetch("/api/notes/");
         let data = await respone.json();
         
         console.log("Running",data)
