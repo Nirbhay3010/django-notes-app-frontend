@@ -26,7 +26,7 @@ let getContent = (note)=>{
 
 const ListItem = ({note}) => {
     return (
-        <Link to={`${api_url}/api/note/${note.id}`}>
+        <Link to={`/note/${note.id}`}>
             <div className="notes-list-item">
             <h3>{getTitle(note)}</h3>
             <p><span>{getTime(note.updated)}</span>{getContent(note)}</p>
