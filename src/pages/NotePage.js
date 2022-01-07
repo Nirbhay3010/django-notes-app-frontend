@@ -1,26 +1,30 @@
 import React,{useEffect,useState} from 'react';
 import {useParams,useNavigate} from 'react-router-dom';
 import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg';
+import {api_url} from '../config'
+
 const NotePage = () => { 
     let noteId = useParams();
     let id=noteId.id;
     let navigate = useNavigate();
     let [note,setnote]= useState(null);
-   
+    
     useEffect(() => {
         getNote();
+        
     },[id]);
 
     let getNote = async(noteId) => {
         if (id==='new') return
-        let response = await fetch(`/api/note/${id}/`)
+        let response = await fetch(`${api_url}/api/note/${id}/`)
         let data = await response.json();
         // console.log(data);
         setnote(data);
+        
     }
 
     let updateNote = async ()=> {
-        fetch(`/api/note/${id}/update/`,{
+        fetch(`${api_url}/api/note/${id}/update/`,{
             method : "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +35,7 @@ const NotePage = () => {
 }
 
     let deleteNote = async ()=> {
-        fetch(`/api/note/${id}/delete/` , {
+        fetch(`${api_url}/api/note/${id}/delete/` , {
             method : "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +46,7 @@ const NotePage = () => {
     }
 
     let addNote = async ()=> {
-        fetch(`/api/note/add/` , {
+        fetch(`${api_url}/api/note/add/` , {
             method : "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -62,7 +66,7 @@ const NotePage = () => {
 
     let handleSubmit = ()=> {
         if(id !== 'new' && !note.body){
-            console.log("Deleting")
+            
             deleteNote();
         }
         else if(id!== 'new'){
@@ -73,7 +77,7 @@ const NotePage = () => {
             addNote();
             
         }
-        console.log("hi",id,note)
+        
         navigate("/",{replace: true});
     }
 

@@ -1,19 +1,19 @@
 import React,{useEffect,useState} from 'react';
 import ListItem from '../components/ListItem';
 import AddButton from '../components/AddButton'
-
+import {api_url} from '../config'
 const NotesList = () => {
 
     let [Notes,setNotes] = useState([]);
     useEffect(()=>{
         getNotes();
     },[])
-
+    
     let getNotes = async () => {
-        let respone = await fetch("/api/notes/");
+        let respone = await fetch(`${api_url}/api/notes/`);
         let data = await respone.json();
         
-        console.log("Running",data)
+        
         setNotes(data);
     }
 
